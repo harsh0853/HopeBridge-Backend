@@ -1,9 +1,9 @@
 # routes/donation.py
 from fastapi import APIRouter, Depends, HTTPException
-from db.mongo import db
-from models.donation import Donation
+from db.db import db
+from models.Donation import Donation
 from datetime import datetime
-from auth import get_current_user, require_role
+from middleware.auth import get_current_user, require_role
 
 router = APIRouter()
 

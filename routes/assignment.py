@@ -1,9 +1,9 @@
 # routes/assignment.py
 from fastapi import APIRouter, Depends, HTTPException
-from db.mongo import db
-from models.assignment import Assignment
+from db.db import db
+from models.Match import Assignment
 from datetime import datetime
-from auth import get_current_user, require_role
+from middleware.auth import get_current_user, require_role
 
 router = APIRouter()
 

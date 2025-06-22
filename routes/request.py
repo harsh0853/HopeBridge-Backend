@@ -1,9 +1,9 @@
 # routes/request.py
 from fastapi import APIRouter, Depends, HTTPException
-from db.mongo import db
-from models.request import Request
+from db.db import db
+from models.Request import Request
 from datetime import datetime
-from auth import get_current_user, require_role
+from middleware.auth import get_current_user, require_role
 
 router = APIRouter()
 
