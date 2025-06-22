@@ -1,10 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
+from routes import user, donation, request, assignment
+from dotenv import load_dotenv
 
-app = FastAPI(title="HopeBridge API",
-    description="Backend service for HopeBridge - Resource Management for NGOs and Donors",
-    version="1.0.0",)
+load_dotenv()
+
+app = FastAPI(
+    title="HopeBridge API",
+    description="Donation & Request Management API",
+    version="1.0.0"
+)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,11 +20,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+app.include_router(user.router, prefix="/api/user", tags=["User"])
+app.include_router(donation.router, prefix="/api/donation", tags=["Donation"])
+app.include_router(request.router, prefix="/api/request", tags=["Request"])
+app.include_router(assignment.router, prefix="/api/match", tags=["Match"])
+
 @app.get("/")
 async def root():
-    print("App started")
-
-#will include routes here
-
-if __name__ == "__main__":
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    return {"message": "HopeBridge backend is live!"}
